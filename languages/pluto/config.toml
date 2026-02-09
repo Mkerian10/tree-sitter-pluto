@@ -1,0 +1,12 @@
+name = "Pluto"
+grammar = "pluto"
+path_suffixes = ["pluto"]
+line_comments = ["// "]
+block_comment = ["/*", "*/"]
+brackets = [
+    { start = "{", end = "}", close = true, newline = true },
+    { start = "[", end = "]", close = true, newline = false },
+    { start = "(", end = ")", close = true, newline = false },
+]
+autoclose_before = ";:.,=}])> \n\t"
+word_characters = ["_"]

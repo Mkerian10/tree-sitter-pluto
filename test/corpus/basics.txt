@@ -1,0 +1,168 @@
+================
+Empty main
+================
+
+fn main() {
+}
+
+---
+
+(source_file
+  (function_definition
+    name: (identifier)
+    body: (block)))
+
+================
+Function with params and return type
+================
+
+fn add(a: int, b: int) int {
+    return a + b
+}
+
+---
+
+(source_file
+  (function_definition
+    name: (identifier)
+    (parameter_list
+      (parameter name: (identifier) type: (type (builtin_type)))
+      (parameter name: (identifier) type: (type (builtin_type))))
+    return_type: (type (builtin_type))
+    body: (block
+      (statement
+        (return_statement
+          (expression
+            (binary_expression
+              left: (expression (identifier))
+              operator: "+"
+              right: (expression (identifier)))))))))
+
+================
+Import
+================
+
+import math
+
+---
+
+(source_file
+  (import_statement (identifier)))
+
+================
+Let statement
+================
+
+fn main() {
+    let x: int = 42
+    let name = "hello"
+}
+
+---
+
+(source_file
+  (function_definition
+    name: (identifier)
+    body: (block
+      (statement
+        (let_statement
+          name: (identifier)
+          type: (type (builtin_type))
+          value: (expression (integer_literal))))
+      (statement
+        (let_statement
+          name: (identifier)
+          value: (expression (string_literal)))))))
+
+================
+Class definition
+================
+
+pub class Point {
+    x: int
+    y: int
+
+    fn distance(self) float {
+        return 0.0
+    }
+}
+
+---
+
+(source_file
+  (class_definition
+    name: (identifier)
+    (field_definition name: (identifier) type: (type (builtin_type)))
+    (field_definition name: (identifier) type: (type (builtin_type)))
+    (function_definition
+      name: (identifier)
+      (parameter_list (parameter))
+      return_type: (type (builtin_type))
+      body: (block
+        (statement
+          (return_statement
+            (expression (float_literal))))))))
+
+================
+Enum with match
+================
+
+enum Color {
+    Red
+    Blue { shade: int }
+}
+
+fn main() {
+    let c = Color.Red
+    match c {
+        Color.Red {
+            print("red")
+        }
+        Color.Blue { shade } {
+            print("blue")
+        }
+    }
+}
+
+---
+
+(source_file
+  (enum_definition
+    name: (identifier)
+    (enum_variant name: (identifier))
+    (enum_variant name: (identifier)
+      (field_list (field_definition name: (identifier) type: (type (builtin_type))))))
+  (function_definition
+    name: (identifier)
+    body: (block
+      (statement
+        (let_statement
+          name: (identifier)
+          value: (expression
+            (enum_construction
+              enum: (identifier)
+              variant: (identifier)))))
+      (statement
+        (match_statement
+          scrutinee: (expression (identifier))
+          (match_arm
+            (qualified_name module: (identifier) name: (identifier))
+            variant: (identifier)
+            body: (block
+              (statement
+                (expression_statement
+                  (expression
+                    (call_expression
+                      function: (identifier)
+                      (argument_list (expression (string_literal)))))))))
+          (match_arm
+            (qualified_name module: (identifier) name: (identifier))
+            variant: (identifier)
+            (binding_list (binding name: (identifier)))
+            body: (block
+              (statement
+                (expression_statement
+                  (expression
+                    (call_expression
+                      function: (identifier)
+                      (argument_list (expression (string_literal))))))))))))))

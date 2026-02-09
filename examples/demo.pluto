@@ -1,0 +1,64 @@
+import math
+
+pub enum Status {
+    Active
+    Suspended { reason: string }
+    Deleted { at: int }
+}
+
+pub class Point {
+    x: int
+    y: int
+
+    fn distance(self) float {
+        return 0.0
+    }
+}
+
+trait Printable {
+    fn display(self)
+}
+
+class Dog impl Printable {
+    name: string
+
+    fn display(self) {
+        print(self.name)
+    }
+}
+
+fn process(s: Status) int {
+    match s {
+        Status.Active {
+            return 1
+        }
+        Status.Suspended { reason } {
+            print(reason)
+            return 2
+        }
+        Status.Deleted { at } {
+            return at
+        }
+    }
+    return 0
+}
+
+fn main() {
+    let p = Point { x: 10, y: 20 }
+    let nums = [1, 2, 3]
+    let active = Status.Active
+    let suspended = Status.Suspended { reason: "banned" }
+
+    if p.x > 5 {
+        print("big")
+    } else {
+        print("small")
+    }
+
+    for n in nums {
+        print(n)
+    }
+
+    let result = math.add(p.x, p.y)
+    print(result)
+}
