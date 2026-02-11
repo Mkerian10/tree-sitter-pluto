@@ -20,6 +20,9 @@ module.exports = grammar({
           $.class_definition,
           $.trait_definition,
           $.enum_definition,
+          $.error_definition,
+          $.app_definition,
+          $.test_definition,
         ),
       ),
 
@@ -113,6 +116,43 @@ module.exports = grammar({
 
     field_list: ($) =>
       seq($.field_definition, repeat(seq(",", $.field_definition))),
+
+    // ── Errors ───────────────────────────────────────────
+
+    error_definition: ($) =>
+      seq(
+        optional("pub"),
+        "error",
+        field("name", $.identifier),
+        "{",
+        repeat($.field_definition),
+        "}",
+      ),
+
+    // ── Apps ─────────────────────────────────────────────
+
+    app_definition: ($) =>
+      seq(
+        optional("pub"),
+        "app",
+        field("name", $.identifier),
+        optional(seq("[", $.parameter_list, "]")),
+        "{",
+        repeat(choice($.function_definition, $.ambient_declaration)),
+        "}",
+      ),
+
+    ambient_declaration: ($) =>
+      seq("ambient", $.identifier),
+
+    // ── Tests ────────────────────────────────────────────
+
+    test_definition: ($) =>
+      seq(
+        "test",
+        field("name", $.string_literal),
+        $.block,
+      ),
 
     // ── Types ────────────────────────────────────────────────
 

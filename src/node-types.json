@@ -1,5 +1,54 @@
 [
   {
+    "type": "ambient_declaration",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "app_definition",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "ambient_declaration",
+          "named": true
+        },
+        {
+          "type": "function_definition",
+          "named": true
+        },
+        {
+          "type": "parameter_list",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "argument_list",
     "named": true,
     "fields": {},
@@ -702,6 +751,32 @@
       "types": [
         {
           "type": "field_list",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "error_definition",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "field_definition",
           "named": true
         }
       ]
@@ -1942,6 +2017,10 @@
       "required": false,
       "types": [
         {
+          "type": "app_definition",
+          "named": true
+        },
+        {
           "type": "class_definition",
           "named": true
         },
@@ -1950,11 +2029,19 @@
           "named": true
         },
         {
+          "type": "error_definition",
+          "named": true
+        },
+        {
           "type": "function_definition",
           "named": true
         },
         {
           "type": "import_statement",
+          "named": true
+        },
+        {
+          "type": "test_definition",
           "named": true
         },
         {
@@ -2046,6 +2133,32 @@
       "types": [
         {
           "type": "field_value_list",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "test_definition",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "string_literal",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "block",
           "named": true
         }
       ]
@@ -2411,6 +2524,14 @@
     "named": false
   },
   {
+    "type": "ambient",
+    "named": false
+  },
+  {
+    "type": "app",
+    "named": false
+  },
+  {
     "type": "bool",
     "named": false
   },
@@ -2428,6 +2549,10 @@
   },
   {
     "type": "enum",
+    "named": false
+  },
+  {
+    "type": "error",
     "named": false
   },
   {
@@ -2504,6 +2629,10 @@
   },
   {
     "type": "string",
+    "named": false
+  },
+  {
+    "type": "test",
     "named": false
   },
   {
